@@ -3,14 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-
 import { environment } from '../environments/environment';
-
 import { AppComponent } from './app.component';
 import { CreateComponent } from './pages/create/create.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -30,6 +27,7 @@ declarations: [
 
 ],
   imports: [
+    MatSlideToggleModule,
     BrowserModule,
     MatCardModule,
     AppRoutingModule,

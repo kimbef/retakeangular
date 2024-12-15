@@ -1,6 +1,8 @@
 <!-- Navigation Bar -->
 <nav>
   <ul>
+    <li><a routerLink="/my-profile" *ngIf="isLoggedIn">My profile</a></li>
+
     <li><a routerLink="/">Home</a></li>
     <li><a routerLink="/login" *ngIf="!isLoggedIn">Login</a></li>
     <li><a routerLink="/register" *ngIf="!isLoggedIn">Register</a></li>
@@ -10,16 +12,18 @@
 </nav>
 
 
+
+
+
 <!-- Main Content -->
 <main>
+  
   <router-outlet></router-outlet>
 </main>
 
-
-
-
-
 <!-- Footer -->
 <footer>
+  <mat-slide-toggle>Toggle me!</mat-slide-toggle>
+
   <p>&copy; 2024 Blog App</p>
 </footer>
