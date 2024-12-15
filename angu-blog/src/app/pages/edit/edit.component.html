@@ -1,0 +1,8 @@
+<h1>Edit Post</h1>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <label>Title:</label>
+  <input formControlName="title" type="text" />
+  <label>Content:</label>
+  <textarea formControlName="content"></textarea>
+  <button type="submit">Save Changes</button>
+</form>
