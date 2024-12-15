@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root', // Ensure this is present
+})
 export class PostService {
   constructor(private firestore: AngularFirestore) {}
 
