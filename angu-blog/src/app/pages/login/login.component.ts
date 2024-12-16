@@ -20,7 +20,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      this.errorMessage = 'Fill all required fields!';
+      this.errorMessage = 'Please fill in all fields.';
       return;
     }
 
@@ -29,11 +29,11 @@ export class LoginComponent {
     this.auth
       .login(email, password)
       .then(() => {
-        this.errorMessage = ''; // Clear any previous errors
+        this.errorMessage = ''; // Clear the error on success
         this.router.navigate(['/dashboard']);
       })
       .catch(() => {
-        this.errorMessage = 'You have entered invalid username or password';
+        this.errorMessage = 'Invalid email or password.';
       });
   }
 }

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -10,29 +9,33 @@ import { Router } from '@angular/router';
 })
 export class CreateComponent {
   createForm: FormGroup;
+  userId: string | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private postService: PostService,
-    private auth: AuthService,
-    private router: Router
-  ) {
+  constructor(private fb: FormBuilder, private postService: PostService, private auth: AuthService) {
     this.createForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
     });
+
+    this.auth.getUser().subscribe((user) => {
+      this.userId = user?.uid || null; // Safely access the UID
+    });
   }
 
   onSubmit(): void {
-    this.auth.getUser().subscribe(user => {
-      if (user && this.createForm.valid) {
-        const postData = {
-          ...this.createForm.value,
-          userId: user.uid,
-          createdAt: new Date(),
-        };
-        this.postService.createPost(postData).then(() => this.router.navigate(['/dashboard']));
-      }
+    if (this.createForm.invalid || !this.userId) {
+      return;
+    }
+
+    const newPost = {
+      ...this.createForm.value,
+      userId: this.userId,
+      createdAt: new Date(),
+    };
+
+    this.postService.createPost(newPost).then(() => {
+      this.createForm.reset();
     });
   }
 }
+

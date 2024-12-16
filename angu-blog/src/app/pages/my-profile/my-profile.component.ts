@@ -7,13 +7,26 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./my-profile.component.css'],
 })
 export class MyProfileComponent implements OnInit {
-  user: any;
+  user: any = null; // Stores user details
+  errorMessage: string = '';
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe((user) => {
-      this.user = user;
-    });
+    this.authService.getUser().subscribe(
+      (user) => {
+        if (user) {
+          this.user = {
+            email: user.email,
+            uid: user.uid,
+          };
+        } else {
+          this.errorMessage = 'No user data available.';
+        }
+      },
+      () => {
+        this.errorMessage = 'Failed to load user information.';
+      }
+    );
   }
 }

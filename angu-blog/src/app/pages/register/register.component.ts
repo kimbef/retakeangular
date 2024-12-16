@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
@@ -17,8 +18,22 @@ export class RegisterComponent {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
+      this.errorMessage = 'Please fill in all fields.';
+      return;
+    }
+
     const { email, password } = this.registerForm.value;
-    this.auth.register(email, password).then(() => this.router.navigate(['/dashboard']));
+
+    this.auth
+      .register(email, password)
+      .then(() => {
+        this.errorMessage = ''; // Clear the error on success
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((error: string) => {
+        this.errorMessage = error; // Show the error from AuthService
+      });
   }
 }

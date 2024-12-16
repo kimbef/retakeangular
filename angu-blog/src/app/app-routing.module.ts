@@ -6,7 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
-import { MyPostsComponent } from './pages/my-posts/my-posts/my-posts.component';
+import { MyPostsComponent } from './pages/my-posts/my-posts.component';
 import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { AuthGuard } from './guards/auth.guard';

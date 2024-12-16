@@ -1,8 +1,17 @@
 <h1>Register</h1>
+<app-dialog-alert [message]="errorMessage"></app-dialog-alert> <!-- Use dialog-alert.component -->
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <label>Email:</label>
+  <label>Email</label>
   <input formControlName="email" type="email" />
-  <label>Password:</label>
+  <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+    <p class="error">Email is required and must be valid.</p>
+  </div>
+
+  <label>Password</label>
   <input formControlName="password" type="password" />
+  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+    <p class="error">Password must be at least 6 characters long.</p>
+  </div>
+
   <button type="submit">Register</button>
 </form>

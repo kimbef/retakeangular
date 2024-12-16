@@ -7,29 +7,25 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
-  userPosts: any[] = [];
+  posts: any[] = [];
   userId: string | null = null;
+userPosts: any;
+deletePost: any;
 
   constructor(private postService: PostService, private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.auth.getUser().subscribe(user => {
-      if (user) {
-        this.userId = user.uid;
-        this.loadUserPosts();
+    this.auth.getUser().subscribe((user) => {
+      this.userId = user?.uid || null; // Safely access the UID
+      if (this.userId) {
+        this.loadPosts();
       }
     });
   }
 
-  loadUserPosts(): void {
-    this.postService.getPosts().subscribe(posts => {
-      this.userPosts = posts.filter(post => post.userId === this.userId);
-    });
-  }
-
-  deletePost(id: string): void {
-    this.postService.deletePost(id).then(() => {
-      this.userPosts = this.userPosts.filter(post => post.id !== id);
+  loadPosts(): void {
+    this.postService.getPosts().subscribe((posts) => {
+      this.posts = posts.filter((post) => post.userId === this.userId);
     });
   }
 }
