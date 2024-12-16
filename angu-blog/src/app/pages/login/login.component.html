@@ -1,9 +1,24 @@
+<h1>Login</h1>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label for="email">Email:</label>
-  <input id="email" formControlName="email" type="email" required />
+  <label>Email:</label>
+  <input formControlName="email" type="email" />
+  <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+    <p class="error">Email is required</p>
+  </div>
+  <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+    <p class="error">Enter a valid email</p>
+  </div>
 
-  <label for="password">Password:</label>
-  <input id="password" formControlName="password" type="password" required />
+  <label>Password:</label>
+  <input formControlName="password" type="password" />
+  <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+    <p class="error">Password is required</p>
+  </div>
 
   <button type="submit">Login</button>
 </form>
+
+<!-- Display Global Error -->
+<div *ngIf="errorMessage" class="global-error">
+  <p>{{ errorMessage }}</p>
+</div>

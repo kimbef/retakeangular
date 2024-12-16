@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
@@ -17,8 +18,22 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.errorMessage = 'Fill all required fields!';
+      return;
+    }
+
     const { email, password } = this.loginForm.value;
-    this.auth.login(email, password).then(() => this.router.navigate(['/dashboard']));
+
+    this.auth
+      .login(email, password)
+      .then(() => {
+        this.errorMessage = ''; // Clear any previous errors
+        this.router.navigate(['/dashboard']);
+      })
+      .catch(() => {
+        this.errorMessage = 'You have entered invalid username or password';
+      });
   }
 }
