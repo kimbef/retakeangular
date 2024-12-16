@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable, switchMap, map, of } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -7,37 +8,24 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './my-posts.component.html',
   styleUrls: ['./my-posts.component.css'],
 })
-export class MyPostsComponent implements OnInit {
-  posts: any[] = []; // Stores posts by the user
-  userId: string | null = null;
-  errorMessage: string = '';
+export class MyPostsComponent {
+  filteredPosts$: Observable<any[]>; // Observable for filtered posts
 
-  constructor(private postService: PostService, private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.authService.getUser().subscribe(
-      (user) => {
-        this.userId = user?.uid || null;
-        if (this.userId) {
-          this.loadMyPosts();
+  constructor(private postService: PostService, private authService: AuthService) {
+    // Combine the user and posts observables
+    this.filteredPosts$ = this.authService.getUser().pipe(
+      switchMap((user) => {
+        if (user) {
+          // Fetch posts and filter them based on the userId
+          return this.postService.getPosts().pipe(
+            map((posts) => posts.filter((post) => post.userId === user.uid))
+          );
         } else {
-          this.errorMessage = 'User not logged in.';
+          // Return an empty array if no user is logged in
+          return of([]);
         }
-      },
-      () => {
-        this.errorMessage = 'Failed to retrieve user information.';
-      }
-    );
-  }
-
-  loadMyPosts(): void {
-    this.postService.getPosts().subscribe(
-      (posts) => {
-        this.posts = posts.filter((post) => post.userId === this.userId);
-      },
-      () => {
-        this.errorMessage = 'Failed to load posts.';
-      }
+      })
     );
   }
 }
+

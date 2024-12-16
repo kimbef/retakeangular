@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,7 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
-  getUser() {
+  getUser(): Observable<firebase.User | null> {
     return this.afAuth.authState; // Observable for the logged-in user
   }
 }

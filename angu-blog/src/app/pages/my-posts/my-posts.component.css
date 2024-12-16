@@ -5,6 +5,18 @@ mat-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+mat-card-header {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+p {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
+
+
 mat-card-actions {
   display: flex;
   justify-content: flex-end;
