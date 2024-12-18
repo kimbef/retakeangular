@@ -1,8 +1,8 @@
+<app-my-posts></app-my-posts>
+
 <div class="dashboard-header">
-  <h1>My Posts</h1>
-  <a routerLink="/create">
-    <button>Create New Post</button>
-  </a>
+ 
+  
 </div>
 
 <div *ngFor="let post of userPosts">
@@ -10,4 +10,3 @@
   <button (click)="deletePost(post.id)">Delete</button>
   <a [routerLink]="['/edit', post.id]">Edit</a>
 </div>
-<a routerLink="/create">Create New Post</a>

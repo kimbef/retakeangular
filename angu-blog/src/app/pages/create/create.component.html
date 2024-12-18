@@ -1,8 +1,25 @@
-<h1>Create New Post</h1>
+<h1>Create Post</h1>
+
+<app-dialog-alert [message]="errorMessage"></app-dialog-alert> <!-- Display error alert -->
+
 <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <label>Title:</label>
-  <input formControlName="title" type="text" />
-  <label>Content:</label>
-  <textarea formControlName="content"></textarea>
+  <!-- Title Field -->
+  <label for="title">Title:</label>
+  <input id="title" formControlName="title" />
+  <div *ngIf="createForm.get('title')?.invalid && createForm.get('title')?.touched">
+    <p *ngIf="createForm.get('title')?.hasError('required')">Title is required.</p>
+    <p *ngIf="createForm.get('title')?.hasError('pattern')">Title must be a single word.</p>
+  </div>
+
+  <!-- Content Field -->
+  <label for="content">Content:</label>
+  <textarea id="content" formControlName="content"></textarea>
+  <div *ngIf="createForm.get('content')?.invalid && createForm.get('content')?.touched">
+    <p *ngIf="createForm.get('content')?.hasError('required')">Content is required.</p>
+    <p *ngIf="createForm.get('content')?.hasError('minlength')">
+      Content must be at least 50 characters.
+    </p>
+  </div>
+
   <button type="submit">Create Post</button>
 </form>
