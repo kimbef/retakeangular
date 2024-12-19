@@ -11,7 +11,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './pages/create/create.component';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EditComponent } from './pages/edit/edit.component';
@@ -25,7 +24,7 @@ import { DialogAlertComponent } from './pages/shared/dialog-alert/dialog-alert.c
 
 @NgModule({
 declarations: [
-  AppComponent, CreateComponent, HomeComponent, LoginComponent, DashboardComponent, EditComponent, RegisterComponent, DetailsComponent, DetailsComponent, MyProfileComponent, MyPostsComponent, DialogAlertComponent
+  AppComponent, CreateComponent, LoginComponent, DashboardComponent, EditComponent, RegisterComponent, DetailsComponent, DetailsComponent, MyProfileComponent, MyPostsComponent, DialogAlertComponent
 
 ],
   imports: [

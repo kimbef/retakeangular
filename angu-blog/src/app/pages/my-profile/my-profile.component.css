@@ -1,7 +1,59 @@
+/* Center the entire content */
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Style the header */
+h1 {
+  text-align: center;
+  color: #3f51b5;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Style the card */
 mat-card {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
+  width: 400px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+mat-card-header {
+  background-color: #383636;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 8px 8px 0 0;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+mat-card-content {
+  padding: 16px;
+  color: #bd9d9d;
+}
+
+/* Add spacing for content paragraphs */
+mat-card-content p {
+  margin: 8px 0;
+}
+
+/* Optional: Adjust for the alert component styling */
+app-dialog-alert {
+  margin-bottom: 20px;
+}
+[mat-card-avatar] {
+  background-size: cover;
+  background-position: center;
+  background-color: #e0e0e0; /* Fallback color */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}

@@ -1,8 +1,8 @@
 
   /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: 0%;
     box-sizing: border-box;
   }
   
@@ -10,23 +10,23 @@
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
     color: #333;
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1;
+    margin: 1px;
   }
   
   /* Navigation Bar */
   nav {
     background-color: #4a90e2;
-    padding: 10px 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
   nav ul {
-    list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 1px;
+    margin: 0%;
   }
   
   nav ul li {
@@ -36,13 +36,13 @@
   nav ul li a {
     color: white;
     text-decoration: none;
-    padding: 8px 12px;
+    padding: 8px ;
     border-radius: 4px;
     font-weight: bold;
   }
   
   nav ul li a:hover {
-    background-color: #357abd;
+    background-color: #5aa5f0;
   }
   
   /* Main Content */
